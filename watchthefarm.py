@@ -1,16 +1,22 @@
+#!/usr/bin/env python
+from optparse import OptionParser
 from getwebpage import *
 from bs4 import BeautifulSoup
- 
-#Change the url based on if you want batch or tape jobs 
-#Batch Farm
-url = 'http://scicomp.jlab.org/scicomp/#/auger/jobs'
-#Tape
-#url = 'http://scicomp.jlab.org/scicomp/#/jasmine/jobs'
 
-#You can hardcode in your username
-#username = ""
-username = raw_input('Enter your username: ')
+parser = OptionParser()
+parser.add_option("-u", help="jlab username", 
+				dest="username",default='')
 
-soup = getwebpage(url)
+parser.add_option("-t", "--tape",
+                action="store_false", dest="url_type", default=True,
+                help="Gets the tape jobs instead of batch jobs")
 
-print get_counts(username,soup)
+
+(options, args) = parser.parse_args()
+
+if options.url_type:
+	url = 'http://scicomp.jlab.org/scicomp/#/auger/jobs'
+else:
+	url = 'http://scicomp.jlab.org/scicomp/#/jasmine/jobs'
+
+print get_counts(options.username,getwebpage(url))
