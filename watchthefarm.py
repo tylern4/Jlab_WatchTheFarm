@@ -25,9 +25,10 @@ else:
 	url = 'http://scicomp.jlab.org/scicomp/#/jasmine/jobs'
 
 data = get_counts(options.username,getwebpage(url))
+data = json.dumps(data,indent=4, separators=(',', ': '))
 
 if options.json_data:
 	with open('data.json', 'a') as file:
-		json.dump(data,file,indent=4, separators=(',', ': '))
+		file.writelines(data)
 else:
 	print data
