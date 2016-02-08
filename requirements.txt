@@ -1,2 +1,2 @@
 bs4
-PyQt4
+dryscrape

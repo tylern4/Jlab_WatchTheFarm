@@ -2,3 +2,7 @@
 *.pyc
 
 data.json
+
+.ipynb_checkpoints/Untitled-checkpoint.ipynb
+
+.ipynb_checkpoints/graph-checkpoint.ipynb

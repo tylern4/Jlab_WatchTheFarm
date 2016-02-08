@@ -2,8 +2,8 @@
 from optparse import OptionParser
 from getwebpage import *
 from bs4 import BeautifulSoup
-import json
-import time
+#import json
+import pandas as pd
 
 parser = OptionParser()
 parser.add_option("-u", help="jlab username", 
@@ -16,7 +16,6 @@ parser.add_option("-j","--json",
 				action="store_true",dest="json_data", default=False,
 				help="Save data to JSON format")
 
-
 (options, args) = parser.parse_args()
 
 if options.url_type:
@@ -25,10 +24,8 @@ else:
 	url = 'http://scicomp.jlab.org/scicomp/#/jasmine/jobs'
 
 data = get_counts(options.username,getwebpage(url))
-data = json.dumps(data,indent=4, separators=(',', ': '))
 
 if options.json_data:
-	with open('data.json', 'a') as file:
-		file.writelines(data)
+	data.to_json('data.json')
 else:
-	print data
+	print data.to_string()
