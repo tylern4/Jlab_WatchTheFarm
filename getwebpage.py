@@ -10,16 +10,28 @@ class Render(QWebPage):
     QWebPage.__init__(self)  
     self.loadFinished.connect(self._loadFinished)  
     self.mainFrame().load(QUrl(url))  
-    self.app.exec_()  
+    self.app.exec_() 
+    self.app.quit() 
   
   def _loadFinished(self, result):  
-    self.frame = self.mainFrame()  
-    self.app.quit()  
+    self.frame = self.mainFrame()
+    self.app.quit()
+
+#class Render(QWebPage):  
+#  def __init__(self, url):  
+#    self.app = QApplication(sys.argv)  
+#    QWebPage.__init__(self)  
+#    self.loadFinished.connect(self._loadFinished)  
+#    self.mainFrame().load(QUrl(url))  
+#    self.app.exec_()  
+#  
+#  def _loadFinished(self, result):  
+#    self.frame = self.mainFrame()  
+#    self.app.quit()
 
 def getwebpage(url):
 	r = Render(url)  
-	html = r.frame.toHtml()
-	html = str(html)
+	html = str(r.frame.toHtml())
 	return BeautifulSoup(html, "html.parser")
 
 def get_counts(username,soups):
