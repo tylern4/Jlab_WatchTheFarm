@@ -3,6 +3,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *  
 from PyQt4.QtWebKit import * 
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 class Render(QWebPage):  
   def __init__(self, url):  
@@ -41,6 +42,7 @@ def get_counts(username,soups):
 		beginning = link.find('username')
 		if beginning != -1:
 			name = link[beginning+9:]
+			counts["time"] = str(datetime.now())
 			if name.find(username) != -1:
 				name = name[:-4]
 				state = name[name.find("state=")+6:name.find(">")-1]
